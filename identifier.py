@@ -3,8 +3,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-
 def makeCoordinates(image,lineParams):
     slope,intercept = lineParams
     
@@ -81,41 +79,13 @@ def displayLines(image,lines):
     
     return lineImage
 
+## FOR SINGLE IMAGE
+# #Loading test image
+# image = cv2.imread("test_image.jpg")
 
-""" **** For Single Image ****
-    
-#Loading test image
-image = cv2.imread("test_image.jpg")
+# #Getting copy of the image
+# laneImage = np.copy(image)
 
-#Getting copy of the image
-laneImage = np.copy(image)
-
-#Getting canny image
-canny = cannyImage(laneImage)
-
-#Displaying image using matplotlib library for getting images dimensional details
-# plt.imshow(canny)
-# plt.show()
-
-croppedImage = regioOfInterest(canny)
-
-#Creating lines
-lines = cv2.HoughLinesP(croppedImage,2,np.pi/180,100,np.array([]),minLineLength=40,maxLineGap=5)
-
-averagedLines = averageSlopeIntercept(laneImage,lines)
-
-#Adding lines to a black background
-lineImage = displayLines(laneImage,averagedLines)
-
-#Comning lines and test image
-combinedImage = cv2.addWeighted(laneImage,0.8,lineImage,1,1)
-
-#Displaying image using cv2 library
-cv2.imshow('result',combinedImage)
-cv2.waitKey(0) """
-
-
-"""   ***** For Video Frame ******  """
 #Capturing video
 cap = cv2.VideoCapture("test.mp4") 
 
@@ -123,9 +93,7 @@ cap = cv2.VideoCapture("test.mp4")
 while(cap.isOpened()):
     
     try:
-        
         _, frame = cap.read()
-        
         
         #Loading test image
         image = cv2.imread("test_image.jpg")
